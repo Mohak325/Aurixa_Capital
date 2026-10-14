@@ -542,7 +542,7 @@ export default function Globe({ activeIndex, onDestinationClick }: GlobeProps) {
   return (
     <div
       ref={containerRef}
-      className="w-full aspect-square relative select-none"
+      className="w-full aspect-square relative select-none touch-pan-y"
       style={{ cursor: isDragging ? "grabbing" : "grab" }}
       aria-label="Interactive 3D globe — Aurixa Capital global investment corridors"
       role="img"

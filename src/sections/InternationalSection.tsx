@@ -139,7 +139,7 @@ export default function InternationalSection() {
               </em>
             </h2>
           </div>
-          <div className="p-4 rounded-sm bg-gradient-to-b from-[#1C1711] to-[#120F0A] border border-[var(--color-gold-500)]/40 shadow-[inset_0_1px_0_rgba(245,230,196,0.15),0_10px_24px_rgba(0,0,0,0.8)] max-w-sm">
+          <div className="p-4 rounded-sm bg-gradient-to-b from-[#1C1711] to-[#120F0A] border border-[var(--color-gold-500)]/40 shadow-[inset_0_1px_0_rgba(245,230,196,0.15),0_10px_24px_rgba(0,0,0,0.8)] w-full lg:max-w-sm">
             <div className="flex items-center gap-2 mb-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               <span className="font-mono text-xs text-[#F2DDA8] font-semibold tracking-wider uppercase">
@@ -153,7 +153,7 @@ export default function InternationalSection() {
         </div>
 
         {/* ── Key Corridor Stats ── */}
-        <div className="intl-stats-row grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-10">
+        <div className="intl-stats-row grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 mb-8 sm:mb-10">
           {[
             { value: "5", label: "Active Corridors", sub: "Mumbai → London corridor" },
             { value: "0%", label: "Capital Gains Tax", sub: "Dubai freehold investment" },
@@ -162,15 +162,15 @@ export default function InternationalSection() {
           ].map((stat) => (
             <div
               key={stat.label}
-              className="intl-stat-card p-4 sm:p-5 bg-gradient-to-b from-[#1C1711] to-[#120F0A] border border-[var(--color-gold-500)]/40 hover:border-[var(--color-gold-400)] rounded-sm shadow-[inset_0_1px_0_rgba(245,230,196,0.16),0_12px_28px_-8px_rgba(0,0,0,0.85)] transition-all duration-300"
+              className="intl-stat-card p-3 sm:p-5 bg-gradient-to-b from-[#1C1711] to-[#120F0A] border border-[var(--color-gold-500)]/40 hover:border-[var(--color-gold-400)] rounded-sm shadow-[inset_0_1px_0_rgba(245,230,196,0.16),0_12px_28px_-8px_rgba(0,0,0,0.85)] transition-all duration-300"
             >
               <span className="font-display text-2xl sm:text-3xl text-[#F2DDA8] font-light leading-none block mb-1.5">
                 {stat.value}
               </span>
-              <p className="font-body text-xs font-semibold text-[#FAF7F2] uppercase tracking-wider">
+              <p className="font-body text-[11px] sm:text-xs font-semibold text-[#FAF7F2] uppercase tracking-wider">
                 {stat.label}
               </p>
-              <p className="font-mono text-[11px] text-[#B8B09F] mt-1 font-medium">
+              <p className="font-mono text-[10px] sm:text-[11px] text-[#B8B09F] mt-1 font-medium leading-tight">
                 {stat.sub}
               </p>
             </div>
@@ -195,10 +195,10 @@ export default function InternationalSection() {
               {DESTINATIONS.map((dest, i) => {
                 const isSelected = activeDestination === i;
                 return (
-                  <li key={dest.id} className="intl-dest-row" style={{ opacity: 0 }}>
+                  <li key={dest.id} className="intl-dest-row">
                     <button
                       className={cn(
-                        "w-full text-left p-4 sm:p-5 rounded-sm transition-all duration-300 group cursor-pointer border",
+                        "w-full text-left p-3.5 sm:p-5 rounded-sm transition-all duration-300 group cursor-pointer border",
                         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-gold-500)]",
                         isSelected
                           ? "bg-gradient-to-br from-[#241D14] to-[#14100A] border-[var(--color-gold-400)] shadow-[inset_0_1px_0_rgba(245,230,196,0.2),0_16px_36px_-6px_rgba(0,0,0,0.95)]"
@@ -207,15 +207,15 @@ export default function InternationalSection() {
                       onClick={() => handleDestinationChange(i)}
                       aria-pressed={isSelected}
                     >
-                      <div className="flex items-start gap-3 sm:gap-5">
+                      <div className="flex items-start gap-2.5 sm:gap-5">
                         {/* Number */}
                         <span
                           className={cn(
-                            "font-display font-light leading-none transition-colors duration-300 flex-shrink-0 mt-0.5 w-8 sm:w-10",
+                            "font-display font-light leading-none transition-colors duration-300 flex-shrink-0 mt-0.5 w-7 sm:w-10",
                             isSelected
                               ? "text-[#F2DDA8]"
                               : "text-[#8E7E62] group-hover:text-[#F2DDA8]",
-                            "text-xl sm:text-2xl"
+                            "text-lg sm:text-2xl"
                           )}
                         >
                           {dest.number}
@@ -223,12 +223,12 @@ export default function InternationalSection() {
 
                         <div className="flex-1 min-w-0">
                           {/* City + Country header */}
-                          <div className="flex items-start justify-between gap-3 mb-1">
-                            <div className="flex items-center gap-2 flex-wrap">
+                          <div className="flex flex-wrap sm:flex-nowrap items-start justify-between gap-1.5 sm:gap-3 mb-1">
+                            <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                               <h3
                                 className={cn(
                                   "font-display font-light leading-tight transition-colors duration-300",
-                                  "text-lg sm:text-2xl",
+                                  "text-base sm:text-2xl",
                                   isSelected
                                     ? "text-[#FAF7F2] font-normal"
                                     : "text-[#E5DFD3] group-hover:text-[#FAF7F2]"
@@ -237,22 +237,22 @@ export default function InternationalSection() {
                                 {dest.city}
                               </h3>
                               <MapPin
-                                size={15}
+                                size={14}
                                 weight="fill"
                                 className={cn(
-                                  "flex-shrink-0 mt-0.5 transition-colors",
+                                  "flex-shrink-0 mt-0.5 transition-colors sm:w-[15px] sm:h-[15px]",
                                   isSelected ? "text-[#F2DDA8]" : "text-[#8E7E62] group-hover:text-[#F2DDA8]"
                                 )}
                               />
                             </div>
-                            <span className="font-mono text-[10px] text-[#F2DDA8] bg-[#262017] px-2.5 py-0.5 rounded border border-[var(--color-gold-500)]/45 uppercase tracking-wider flex-shrink-0 mt-0.5 font-semibold shadow-sm">
+                            <span className="font-mono text-[9px] sm:text-[10px] text-[#F2DDA8] bg-[#262017] px-2 sm:px-2.5 py-0.5 rounded border border-[var(--color-gold-500)]/45 uppercase tracking-wider flex-shrink-0 mt-0.5 font-semibold shadow-sm self-start sm:self-auto">
                               {dest.country}
                             </span>
                           </div>
 
                           {/* Tagline & Quick Skyline Thumbnail */}
                           <div className="flex items-center justify-between gap-3">
-                            <p className="font-mono text-xs text-[#E6C98A] uppercase tracking-wide font-medium">
+                            <p className="font-mono text-[11px] sm:text-xs text-[#E6C98A] uppercase tracking-wide font-medium leading-relaxed">
                               {dest.description}
                             </p>
                             {!isSelected && (
@@ -272,10 +272,10 @@ export default function InternationalSection() {
                           <div
                             className={cn(
                               "overflow-hidden transition-all duration-500",
-                              isSelected ? "max-h-[500px] opacity-100 mt-4" : "max-h-0 opacity-0"
+                              isSelected ? "max-h-[1400px] lg:max-h-[600px] opacity-100 mt-4" : "max-h-0 opacity-0"
                             )}
                           >
-                            <div className="pt-4 border-t border-[var(--color-gold-500)]/20 grid sm:grid-cols-2 gap-4">
+                            <div className="pt-4 border-t border-[var(--color-gold-500)]/20 grid grid-cols-1 sm:grid-cols-2 gap-4">
                               {/* Description */}
                               <div>
                                 <p className="font-body text-xs sm:text-sm text-[#DCD5C6] leading-relaxed mb-3">
@@ -332,17 +332,17 @@ export default function InternationalSection() {
                         {/* Active indicator chevron */}
                         <div
                           className={cn(
-                            "w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 border mt-0.5",
+                            "w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 border mt-0.5",
                             isSelected
                               ? "bg-[var(--color-gold-400)] text-[#0A0907] border-[var(--color-gold-400)] shadow-[0_2px_8px_rgba(201,162,77,0.4)]"
                               : "bg-[#181510] text-[#8E7E62] border-[#2A241A] group-hover:border-[var(--color-gold-500)]/40 group-hover:text-[#F2DDA8]"
                           )}
                         >
                           <ArrowRight
-                            size={14}
+                            size={13}
                             weight="bold"
                             className={cn(
-                              "transition-transform duration-300",
+                              "transition-transform duration-300 sm:w-[14px] sm:h-[14px]",
                               isSelected ? "translate-x-0.5" : "group-hover:translate-x-0.5"
                             )}
                           />
@@ -359,13 +359,13 @@ export default function InternationalSection() {
           <div className="lg:col-span-5 relative">
             <div className="intl-globe-col lg:sticky lg:top-24 flex flex-col gap-4">
               {/* Globe canvas container */}
-              <div className="relative rounded-sm overflow-hidden border border-[var(--color-gold-500)]/30 bg-[#0A0907] shadow-[inset_0_1px_0_rgba(242,221,168,0.1),0_20px_50px_-15px_rgba(0,0,0,0.95)]">
+              <div className="relative rounded-sm overflow-hidden border border-[var(--color-gold-500)]/30 bg-[#0A0907] shadow-[inset_0_1px_0_rgba(242,221,168,0.1),0_20px_50px_-15px_rgba(0,0,0,0.95)] max-h-[320px] sm:max-h-none">
                 {/* Top overlay label */}
                 <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4 py-2.5 bg-gradient-to-b from-[#0A0907]/90 via-[#0A0907]/60 to-transparent pointer-events-none">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                     <span className="font-mono text-[10px] text-[#F2DDA8] uppercase tracking-widest font-semibold">
-                      AURIXA CAPITAL · LIVE CORRIDOR MAP
+                      AURIXIA CAPITAL · LIVE CORRIDOR MAP
                     </span>
                   </div>
                   <span className="font-mono text-[9px] text-[#FAF7F2] bg-[#181510]/80 px-2 py-0.5 rounded border border-[var(--color-gold-500)]/30">
@@ -455,11 +455,11 @@ export default function InternationalSection() {
         </div>
 
         {/* ── Cross-Border Corporate Banner ── */}
-        <div className="mt-10 sm:mt-12 p-6 sm:p-8 bg-gradient-to-r from-[#1E1912] via-[#14100A] to-[#1E1912] border border-[var(--color-gold-500)]/45 rounded-sm shadow-[inset_0_1px_0_rgba(245,230,196,0.16),0_20px_48px_-8px_rgba(0,0,0,0.95)] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="mt-8 sm:mt-12 p-5 sm:p-8 bg-gradient-to-r from-[#1E1912] via-[#14100A] to-[#1E1912] border border-[var(--color-gold-500)]/45 rounded-sm shadow-[inset_0_1px_0_rgba(245,230,196,0.16),0_20px_48px_-8px_rgba(0,0,0,0.95)] flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6">
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2 h-2 rounded-full bg-[var(--color-gold-400)]" />
-              <span className="font-mono text-xs text-[#F2DDA8] uppercase tracking-widest font-semibold">
+              <span className="font-mono text-[11px] sm:text-xs text-[#F2DDA8] uppercase tracking-widest font-semibold">
                 CROSS-BORDER CORPORATE & ENTERPRISE INVESTMENTS
               </span>
             </div>
@@ -475,7 +475,7 @@ export default function InternationalSection() {
               document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
             }}
             id="international-cta"
-            className="flex-shrink-0"
+            className="flex-shrink-0 w-full md:w-auto text-center justify-center"
           >
             Inquire for Global Advisory
           </Button>
