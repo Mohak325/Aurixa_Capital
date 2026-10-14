@@ -1,26 +1,515 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────
+   AURIXA CAPITAL — GLOBAL STYLES & DESIGN TOKENS
+   Version 1.0 · 13 October 2026
+───────────────────────────────────────────── */
+
+@theme {
+  /* ── Surfaces (Elevated for crisp foreground-background tactile contrast) ── */
+  --color-ink-950: #060504;
+  --color-ink-900: #14110c;
+  --color-ink-850: #1c1711;
+  --color-ink-800: #262017;
+  --color-ink-700: #352c21;
+
+  /* ── Gold ── */
+  --color-gold-100: #f5e6c4;
+  --color-gold-300: #e6c98a;
+  --color-gold-400: #e6c98a;
+  --color-gold-500: #c9a24d;
+  --color-gold-600: #a8802f;
+  --color-gold-800: #6b5120;
+
+  /* ── Text (High contrast, crystal clear legibility against dark surfaces) ── */
+  --color-ivory-50: #faf7f2;
+  --color-ivory-200: #e2ddd2;
+  --color-stone-400: #b8b09f;
+  --color-stone-600: #887e6d;
+
+  /* ── States ── */
+  --color-error: #d96a5a;
+  --color-success: #8fb58a;
+
+  /* ── Typography ── */
+  --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* ── Fluid type scale ── */
+  --text-display-xl: clamp(3rem, 1.5rem + 7vw, 8.5rem);
+  --text-display-lg: clamp(2.5rem, 1.2rem + 4.5vw, 5.5rem);
+  --text-statement: clamp(1.75rem, 1rem + 3.2vw, 3.75rem);
+  --text-h2: clamp(2rem, 1.2rem + 3vw, 4rem);
+  --text-h3: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+  --text-h4: 1.125rem;
+  --text-body-lg: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-eyebrow: 0.75rem;
+  --text-numeral-xl: clamp(6rem, 3rem + 14vw, 16rem);
+  --text-numeral-md: clamp(2.5rem, 2rem + 2vw, 4rem);
+
+  /* ── Motion ── */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 200ms;
+  --dur-base: 400ms;
+  --dur-slow: 800ms;
+  --dur-cinematic: 1400ms;
+
+  /* ── Breakpoints ── */
+  --breakpoint-xs: 360px;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  --breakpoint-3xl: 1920px;
+
+  /* ── Spacing extras ── */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+  --spacing-26: 6.5rem;
+  --spacing-30: 7.5rem;
+  --spacing-38: 9.5rem;
+
+  /* ── Border radius ── */
+  --radius-card: 2px;
+  --radius-callout: 10px;
+}
+
+/* ── CSS Custom Properties ── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Lines & overlays (crisp, high-contrast gold hairlines) */
+  --hairline: rgba(212, 175, 95, 0.38);
+  --hairline-strong: rgba(230, 201, 138, 0.70);
+  --scrim-hero: linear-gradient(
+    to top,
+    rgba(6, 5, 4, 0.95) 0%,
+    rgba(6, 5, 4, 0.35) 45%,
+    rgba(6, 5, 4, 0.55) 100%
+  );
+
+  /* Gold foil gradient */
+  --gold-foil: linear-gradient(
+    100deg,
+    #8a6a2b 0%,
+    #e6c98a 45%,
+    #b8903f 70%,
+    #f2dda8 100%
+  );
+
+  /* Layout */
+  --page-margin: clamp(20px, 5vw, 96px);
+  --container-max: 1440px;
+  --header-h-mobile: 72px;
+  --header-h-tablet: 80px;
+  --header-h-desktop: 88px;
+
+  /* Stagger timing */
+  --stagger-line: 80ms;
+  --stagger-item: 60ms;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ─────────────────────────────────────────────
+   BASE LAYER
+───────────────────────────────────────────── */
+@layer base {
+  html {
+    background-color: #060504;
+    color: #ded7c8;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: auto; /* Lenis controls this */
+    font-family: var(--font-body);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: #060504;
+    min-height: 100svh;
+    overflow-x: clip;
+  }
+
+  /* Text selection */
+  ::selection {
+    background-color: #c9a24d;
+    color: #080706;
+  }
+
+  /* Focus visible */
+  *:focus-visible {
+    outline: 2px solid #c9a24d;
+    outline-offset: 3px;
+  }
+
+  /* Custom scrollbar (desktop/fine pointer) */
+  @media (pointer: fine) {
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0b0a08; }
+    ::-webkit-scrollbar-thumb { background: #6b5120; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #a8802f; }
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #6b5120 #0b0a08;
+    }
+  }
+
+  /* Lenis integration */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+    overflow-x: clip;
+  }
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
+
+  /* Headings default to display font */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: #f4efe4;
+    font-weight: 300;
+    line-height: 1.05;
+  }
+
+  /* Links */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Remove default button styles */
+  button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  /* Images */
+  img, video {
+    max-width: 100%;
+    display: block;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─────────────────────────────────────────────
+   COMPONENTS
+───────────────────────────────────────────── */
+@layer components {
+  /* ── Film Grain Overlay ── */
+  .film-grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.035;
+    mix-blend-mode: soft-light;
+    /* SVG inline noise — no external file needed */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    background-repeat: repeat;
+    will-change: auto;
+  }
+
+  /* ── Container ── */
+  .container-au {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--page-margin);
+  }
+
+  /* ── High-Contrast Luxury Card Surfaces ── */
+  .card-luxury {
+    background: linear-gradient(180deg, #1c1711 0%, #120f0a 100%);
+    border: 1px solid rgba(212, 175, 95, 0.38);
+    box-shadow: inset 0 1px 0 rgba(245, 230, 196, 0.16), 0 16px 36px -8px rgba(0, 0, 0, 0.9);
+  }
+
+  .card-luxury-hover {
+    transition: all 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-luxury-hover:hover {
+    border-color: rgba(230, 201, 138, 0.65);
+    box-shadow: inset 0 1px 0 rgba(245, 230, 196, 0.25), 0 20px 44px -10px rgba(0, 0, 0, 0.95), 0 0 24px rgba(201, 162, 77, 0.15);
+  }
+
+  /* ── Gold Foil Text ── */
+  .text-gold-foil {
+    background: var(--gold-foil);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Gold Gradient Shimmer ── */
+  .gold-gradient-shimmer {
+    background: linear-gradient(
+      100deg,
+      #9a7226 0%,
+      #e6c98a 22%,
+      #fffbe8 48%,
+      #e6c98a 72%,
+      #9a7226 100%
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: goldShimmerSweep 7s cubic-bezier(0.4, 0, 0.2, 1) infinite 2s;
+  }
+
+  /* ── Hairline Divider ── */
+  .divider-hairline {
+    height: 1px;
+    background: var(--hairline);
+    width: 100%;
+  }
+
+  /* ── Diamond Divider ── */
+  .divider-diamond {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .divider-diamond::before,
+  .divider-diamond::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--hairline);
+  }
+  .divider-diamond .diamond-gem {
+    width: 6px;
+    height: 6px;
+    background: #c9a24d;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    margin: 0 14px;
+  }
+
+  /* ── Hero Scrim ── */
+  .scrim-hero {
+    background: var(--scrim-hero);
+  }
+
+  /* ── Corner Ticks ── */
+  .corner-ticks {
+    position: relative;
+  }
+  .corner-ticks::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    border-top: 1px solid #c9a24d;
+    border-left: 1px solid #c9a24d;
+    z-index: 2;
+  }
+  .corner-ticks::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 14px;
+    height: 14px;
+    border-bottom: 1px solid #c9a24d;
+    border-right: 1px solid #c9a24d;
+    z-index: 2;
+  }
+
+  /* ── Eyebrow ── */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--text-eyebrow);
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #e6c98a;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: #e6c98a;
+    flex-shrink: 0;
+  }
+
+  /* ── Section heading ── */
+  .section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-h2);
+    font-weight: 300;
+    color: #f4efe4;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── Statement ── */
+  .statement {
+    font-family: var(--font-display);
+    font-size: var(--text-statement);
+    font-weight: 300;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── Overflow mask for line reveals ── */
+  .mask-line {
+    overflow: hidden;
+    display: block;
+  }
+
+  /* ── Icon badge ── */
+  .icon-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--hairline);
+    color: #c9a24d;
+    flex-shrink: 0;
+    transition: border-color 200ms;
+  }
+  .icon-badge:hover {
+    border-color: var(--hairline-strong);
+  }
+
+  /* ── Callout box ── */
+  .callout-box {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-callout);
+    padding: 20px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: transparent;
+  }
+
+  /* ── Scroll progress bar ── */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #c9a24d;
+    transform-origin: left;
+    transform: scaleX(0);
+    z-index: 200;
+  }
 }
+
+/* ─────────────────────────────────────────────
+   UTILITIES
+───────────────────────────────────────────── */
+@layer utilities {
+  .max-ch-62 { max-width: 62ch; }
+  .max-ch-22 { max-width: 22ch; }
+  .max-ch-40 { max-width: 40ch; }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  /* Section vertical padding (mobile-first, tightened for seamless section flow) */
+  .section-py {
+    padding-block: 44px;
+    @media (min-width: 768px) {
+      padding-block: 56px;
+    }
+    @media (min-width: 1024px) {
+      padding-block: 64px;
+    }
+  }
+
+  /* Page-width gutters */
+  .px-page {
+    padding-inline: var(--page-margin);
+  }
+
+  /* Hidden reveal state (for GSAP initial states) */
+  .reveal-hidden {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  /* Image grading overlay */
+  .img-grade::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 7, 6, 0.15);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  /* Word mask line (for hero headline reveal) */
+  .word-mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   KEYFRAMES
+───────────────────────────────────────────── */
+
+/* Hero scroll-cue line wipe */
+@keyframes scrollLineDown {
+  0%   { transform: translateY(-100%); opacity: 1; }
+  60%  { transform: translateY(100%);  opacity: 1; }
+  61%  { transform: translateY(100%);  opacity: 0; }
+  62%  { transform: translateY(-100%); opacity: 0; }
+  100% { transform: translateY(-100%); opacity: 0; }
+}
+
+/* Ambient pulse for live dot */
+@keyframes ambientPulse {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%       { opacity: 0.4; transform: scale(1.5);  }
+}
+
+/* Gold headline shimmer sweep */
+@keyframes goldShimmerSweep {
+  0% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: -100% 0%;
+  }
+  100% {
+    background-position: -100% 0%;
+  }
+}
+
+/* Seamless infinite marquee ticker */
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 35s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
